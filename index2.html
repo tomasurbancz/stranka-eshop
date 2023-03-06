@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="cz">
+<head>
+    <link rel="shortcut icon" type="image/png" href="images/logo.png"/>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Výsledky vyhledávání</title>
+    <script>
+        var size = 26;
+        var devSize = 0;
+        var contentSize = 0;
+        var gameNames = Array(size);
+        var gameImages = Array(size);
+        var gameDescription = Array(size);
+        var gamePrices = Array(size);
+        var gameLinks = Array(size);
+        var gameDeveloper = Array(size);
+        var gameContent = Array(size);
+        var searched = "";
+        var isDeveloperAns = false;
+        var isContentAns = false;
+        var developers = Array(size);
+        var content = Array(size);
+        var isNintendoSwitchConsole = false;
+        var isGame = false;
+
+        function changeSearchedToGame() {
+            if(searched.toLowerCase() === "playstation 5") searched = "PS5";
+            if(searched.toLowerCase() === "playstation 4") searched = "PS4";
+            if(searched.toLowerCase() === "playstation 4") searched = "PS4";
+            if(searched.toLowerCase() === "xbox") searched = "XBOX";
+            if(searched.toLowerCase() === "pc") searched = "PC";
+        }
+
+        function changeSearchedForContent() {
+            if(searched.toLowerCase() === "playstation 5") searched = "PS5PRISLUSENSTVI";
+        }
+
+        function loadData() {
+            setUp();
+            loadDevelopers();
+            loadContent();
+            searched = document.URL;
+            if(searched.includes("index2.html?search=")) {
+                searched = searched.split("index2.html?search=")[1].toUpperCase().replaceAll("+", " ");
+                console.log(searched);
+                isDeveloper(searched);
+                if(searched === "") {
+                    document.getElementById("vyhledavani").innerHTML = "VŠECHNY PRODUKTY";
+                } else if(isDeveloperAns) {
+                    document.getElementById("vyhledavani").innerHTML = "PRODUKTY VÝROBCE " + searched;
+                } else if(searched.startsWith("SEARCH") && searched.endsWith(".,.")) {
+                    searched = searched.replace("SEARCH", "").replace(".,.", "").trim();
+                    if(searched.endsWith("GAME")) {
+                        searched = searched.replace("GAME", "").trim();
+                        isGame = true;
+                        document.getElementById("vyhledavani").innerHTML = "HRY PRO " + searched;
+                        changeSearchedToGame();
+                    } else if(searched.endsWith("PRISLUSENSTVI")) {
+                        searched = searched.replace("PRISLUSENSTVI", "").trim();
+                        document.getElementById("vyhledavani").innerHTML = "PŘÍSLUŠENSTVÍ PRO " + searched;
+                        changeSearchedForContent();
+                        isContent(searched);
+                    } else {
+                        document.getElementById("vyhledavani").innerHTML = searched;
+                        if(searched === "NINTENDO SWITCH") {
+                            isNintendoSwitchConsole = true;
+                        } 
+                    }
+                } else {
+                    document.getElementById("vyhledavani").innerHTML = "VYHLEDÁVÁNÍ " + '"' + searched + '"';
+                }
+                checkForGames();
+            }
+            else {
+                odpocet();
+            }
+        }
+
+        function isDeveloper(dev = "") {
+            for(var i = 0; i < devSize; i++) {
+                if(developers[i].toLowerCase() === dev.toLowerCase()) isDeveloperAns = true;
+            }
+        }
+
+        function isContent(contentS = "") {
+            console.log
+            for(var i = 0; i < contentSize; i++) {
+                console.log("CONTENT1: " + content[i].toLowerCase() + " " + contentS.toLowerCase() + " " + (content[i].toLowerCase() === contentS.toLowerCase()));
+                if(content[i].toLowerCase() === contentS.toLowerCase()) isContentAns = true;
+            }
+        }
+        
+        function loadContent() {
+            var preContent = new Array(size);
+            for(var i = 0; i < size; i++) {
+                if(!preContent.includes(gameContent[i])) {
+                    preContent[contentSize] = gameContent[i];
+                    contentSize++;
+                }
+            }
+            content = new Array(contentSize);
+            var currentVal = 0;
+            for(var i = 0; i < size; i++) {
+                if(!content.includes(gameContent[i])) {
+                    content[currentVal] = gameContent[i];
+                    currentVal++;
+                }
+            }
+        }
+
+        function loadDevelopers() {
+            var preDevelopers = new Array(size);
+            for(var i = 0; i < size; i++) {
+                if(!preDevelopers.includes(gameDeveloper[i])) {
+                    preDevelopers[devSize] = gameDeveloper[i];
+                    devSize++;
+                }
+            }
+            developers = new Array(devSize);
+            var currentVal = 0;
+            for(var i = 0; i < size; i++) {
+                if(!developers.includes(gameDeveloper[i])) {
+                    developers[currentVal] = gameDeveloper[i];
+                    currentVal++;
+                }
+            }
+        }
+
+        function setUp() {
+            gameNames[0] = "Hogwarts Legacy (PS5)";
+            gameImages[0] = "hogwartslegacy.png";
+            gameDescription[0] = "Přichází zcela nový příběh z kouzelného světa čar a kouzel. Pojď se podívat do Bradavic 19. století.";
+            gamePrices[0] = "1 899 Kč";
+            gameDeveloper[0] = "Avalanche Software";
+            gameContent[0] = "playstation5game";
+            gameLinks[0] = "products/hogwarts-legacy.html";
+            gameNames[1] = "Transport Fever 2 Console Edition (PS4)";
+            gameImages[1] = "transportfever.jfif";
+            gameDescription[1] = "Hra pro PS4 - Klasický žánr přepravní simulace má nový zlatý standard v podobě Transport Fever 2.";
+            gamePrices[1] = "999 Kč";
+            gameDeveloper[1] = "Urban Games";
+            gameContent[1] = "playstation4game";
+            gameLinks[1] = "products/transport-fever.html";
+            gameNames[2] = "Clash Artifacts of Chaos Zeno Edition (XBOX)";
+            gameImages[2] = "clashartifactofchaos.jpg";
+            gameDescription[2] = "Hra Clash Artifacts of Chaos se odehrává ve stejném světě jako Zeno Clash a Zeno Clash II, ale hra je zcela nezávislá.";
+            gamePrices[2] = "799 Kč";
+            gameDeveloper[2] = "ACE Team";
+            gameContent[2] = "xboxgame";
+            gameLinks[2] = "products/clash.html";
+            gameNames[3] = "Monster Energy Supercross 6 (PS4)";
+            gameImages[3] = "monsterenergy.jfif";
+            gameDescription[3] = "Originální superkrosová hra se vrací s veškerým oficiálním obsahem ze superkrosového mistrovství 2022.";
+            gamePrices[3] = "1 299 Kč";
+            gameDeveloper[3] = "Milestone";
+            gameContent[3] = "playstation4game";
+            gameLinks[3] = "products/monster.html";
+            gameNames[4] = "Train Life A Railway Simulator (NINTENDO)";
+            gameImages[4] = "trainlife.jfif";
+            gameDescription[4] = "Vůbec poprvé v železničním simulátoru se stáváš strojvedoucím i ředitelem společnosti zároveň!";
+            gamePrices[4] = "799 Kč";
+            gameDeveloper[4] = "Simteract";
+            gameContent[4] = "nintendogame";
+            gameLinks[4] = "products/train.html";
+            gameNames[5] = "DC Justice League Cosmic Chaos (PS4)";
+            gameImages[5] = "dcjusticechaos.webp";
+            gameDescription[5] = "Spoj se proti chaosu ve zcela novém dobrodružství v otevřeném světe, kde se Liga spravedlnosti utká s panem Mxyzptlkem, mocným šprýmařem z 5. dimenze.";
+            gamePrices[5] = "1 299 Kč";
+            gameDeveloper[5] = "PHL Collective";
+            gameContent[5] = "playstation4game";
+            gameLinks[5] = "products/dc.html";
+            gameNames[6] = "Gamedec Definitive Edition (PS5)";
+            gameImages[6] = "gamedec.jfif";
+            gameDescription[6] = "Oceněný Gamedec je kyberpunkové izometrické RPG pro jednoho hráče, které se neustále přizpůsobuje tvým rozhodnutím a nikdy tě nesoudí.";
+            gamePrices[6] = "899 Kč";
+            gameDeveloper[6] = "Anshar Studios";
+            gameContent[6] = "playstation5game";
+            gameLinks[6] = "products/gamedec.html";
+            gameNames[7] = "Dyschronia Chronos Alternate VR2 (PS5)";
+            gameImages[7] = "dyschroniachronos.jfif";
+            gameDescription[7] = "Zahraj si všechny tři epizody anime stylizovaného sci-fi a vyřeš teoreticky nemožný zločin v této napínavé sci-fi záhadě.";
+            gamePrices[7] = "999 Kč";
+            gameDeveloper[7] = "My Dearest";
+            gameContent[7] = "playstation5game";
+            gameLinks[7] = "products/dyschronia.html";
+            gameNames[8] = "Anno 1800 Console Edition (PS5)";
+            gameImages[8] = "anno1800.webp";
+            gameDescription[8] = "Nech se pohltit jedním z nejúžasnějších a nejrychleji se měnících období v dějinách lidstva, které na tebe čeká v této komplexní budovatelské strategii!";
+            gamePrices[8] = "999 Kč";
+            gameDeveloper[8] = "Ubisoft";
+            gameContent[8] = "playstation5game";
+            gameLinks[8] = "products/anno.html";
+            gameNames[9] = "WWE 2K23 (PS4)";
+            gameImages[9] = "wwe2k23.webp";
+            gameDescription[9] = "WWE 2K23 je ještě silnější díky rozšířeným funkcím, nádherné grafice a bohaté soupisce superhvězd a legend WWE.";
+            gamePrices[9] = "2 399 Kč";
+            gameDeveloper[9] = "Take 2";
+            gameContent[9] = "playstation4game";
+            gameLinks[9] = "products/wwe.html";
+            gameNames[10] = "Peppa Pig World Adventures (PS4)";
+            gameImages[10] = "peppapig.jfif";
+            gameDescription[10] = "Vytvoř si domov v sousedství prasátka Peppa Pig pro sebe, své bratry a sestry i dospělé.";
+            gamePrices[10] = "1 099 Kč";
+            gameDeveloper[10] = "Petoons Studio";
+            gameContent[10] = "playstation4game";
+            gameLinks[10] = "products/peppa.html";
+            gameNames[11] = "Hogwarts Legacy Deluxe (PS4)";
+            gameImages[11] = "hogwartslegacydeluxe.jpeg";
+            gameDescription[11] = "Přichází zcela nový příběh z kouzelného světa čar a kouzel. Pojď se podívat do Bradavic 19. století.";
+            gamePrices[11] = "2 099 Kč";
+            gameDeveloper[11] = "Avalanche Software";
+            gameContent[11] = "playstation4game";
+            gameLinks[11] = "products/hogwarts-deluxe.html";
+            gameNames[12] = "PlayStation 5";
+            gameImages[12] = "playstation5.webp";
+            gameDescription[12] = "Pokračovatel nejprodávanější konzole současnosti";
+            gamePrices[12] = "13 490 Kč";
+            gameDeveloper[12] = "Sony";
+            gameContent[12] = "PS5CONSOLE";
+            gameLinks[12] = "products/ps5.html";
+            gameNames[13] = "PlayStation 5 + Gof Of War Ragnarok";
+            gameImages[13] = "playstation5godofwar.webp";
+            gameDescription[13] = "Pokračovatel nejprodávanější konzole současnosti";
+            gamePrices[13] = "15 490 Kč";
+            gameDeveloper[13] = "Sony";
+            gameContent[13] = "PS5CONSOLE";
+            gameLinks[13] = "products/ps5-gowr.html";
+            gameNames[14] = "PLAYSTATION 4 PRO";
+            gameImages[14] = "ps4pro.webp";
+            gameDescription[14] = "Systém PlayStation 4 Pro je nabitý těmi nejnovějšími technologiemi a přináší ti ten doposud nejrychlejší, nejostřejší a nejplynulejší herní zážitek";
+            gamePrices[14] = "8 290 Kč";
+            gameDeveloper[14] = "Sony";
+            gameContent[14] = "PS4CONSOLE";
+            gameLinks[14] = "products/ps4.html";
+            gameNames[15] = "MINECRAFT NINTENDO SWITCH EDITION (NINTENDO)";
+            gameImages[15] = "minecraftnintendo.png";
+            gameDescription[15] = "Jedna z nejhranějších her světa, speciálně upravená pro konzoli Nintendo Switch.";
+            gamePrices[15] = "749 Kč";
+            gameDeveloper[15] = "Nintendo";
+            gameContent[15] = "nintendogame";
+            gameLinks[15] = "products/mc.html";
+            gameNames[16] = "THE LEGEND OF ZELDA BREATH OF THE WILD (NINTENDO)";
+            gameImages[16] = "zeldanintendo.png";
+            gameDescription[16] = "Vstup do světa plného tajemství, objevů a dobrodružství v The Legend of Zelda: Breath of the Wild, nejnovějším titulu v úspěšné sérii";
+            gamePrices[16] = "1 699 Kč";
+            gameDeveloper[16] = "Nintendo";
+            gameContent[16] = "nintendogame";
+            gameLinks[16] = "products/zelda.html";
+            gameNames[17] = "FORZA HORIZON 5 (XBOX)";
+            gameImages[17] = "forzahorizonxbox.png";
+            gameDescription[17] = "Prozkoumej překrásné kraje Mexika, které se neustále vyvíjejí a ve kterých si užiješ neomezenou a zábavnou řidičskou akci ve stovkách nejlepších aut na světě.";
+            gamePrices[17] = "1 499 Kč";
+            gameDeveloper[17] = "Microsoft";
+            gameContent[17] = "xboxgame";
+            gameLinks[17] = "products/forza.html";
+            gameNames[18] = "MINECRAFT DUNGEONS ULTIMATE EDITION (XBOX)";
+            gameImages[18] = "minecraftdungeonsxbox.png";
+            gameDescription[18] = "Probojuj se novou akční adventurou, která je inspirovaná klasickými dungeony a celá je zasazená do jedinečného stylu Minecraft.";
+            gamePrices[18] = "699 Kč";
+            gameDeveloper[18] = "Mojang";
+            gameContent[18] = "xboxgame";
+            gameLinks[18] = "products/mcd.html";
+            gameNames[19] = "STAR WARS JEDI SURVIVOR (PC)";
+            gameImages[19] = "starwarsjedi.jpg";
+            gameDescription[19] = "Star Wars Jedi: Survivor se odehrává pět let po událostech Star Wars Jedi: Fallen Order.";
+            gamePrices[19] = "1 799 Kč";
+            gameDeveloper[19] = "EA";
+            gameContent[19] = "pcgame";
+            gameLinks[19] = "products/starwars.html";
+            gameNames[20] = "COMPANY OF HEROES 3 LAUNCH EDITION METAL CASE (PC)";
+            gameImages[20] = "companyofheroes3.png";
+            gameDescription[20] = "Přidej se do boje s Company of Heroes 3. Legendární franšíza strategií je zpět a kombinuje souboj, který ti rozbuší srdce s novým stylem strategie";
+            gamePrices[20] = "1 299 Kč";
+            gameDeveloper[20] = "Sega";
+            gameContent[20] = "pcgame";
+            gameLinks[20] = "products/company.html";
+            gameNames[21] = "FIFA 23 (PC)";
+            gameImages[21] = "fifa23.png";
+            gameDescription[21] = "EA SPORTS FIFA 23 s technologií HyperMotion2 přináší do virtuální verze nejpopulárnějšího sportu světa ještě realističtější hratelnost, mužský i ženský šampionát FIFA World Cup";
+            gamePrices[21] = "1 699 Kč";
+            gameDeveloper[21] = "EA";
+            gameContent[21] = "pcgame";
+            gameLinks[21] = "products/fifa.html";
+            gameNames[22] = "NINTENDO SWITCH KONZOLE ČERVENÁ/MODRÁ";
+            gameImages[22] = "nintendoswitch.webp";
+            gameDescription[22] = "Nintendo Switch je průlomová domácí herní konzole. Je ji totiž nejen možné připojit doma k televizi, ale taktéž okamžitě transformovat na handheld s 6.2 palcovou obrazovkou.";
+            gamePrices[22] = "7 190 Kč";
+            gameDeveloper[22] = "Nintendo";
+            gameContent[22] = "NINTENDO";
+            gameLinks[22] = "products/nintendo.html";
+            gameNames[23] = "XBOX SERIES S 512 GB";
+            gameImages[23] = "xboxseriess.webp";
+            gameDescription[23] = "Připrav se na revoluci v konzolovém hraní. Xbox Series S - nová konzole od Microsoftu přináší odvážný design, nejvyšší herní výkon a zbrusu nové zážitky";
+            gamePrices[23] = "5 990 Kč";
+            gameDeveloper[23] = "Microsoft";
+            gameContent[23] = "XBOXSERIESS";
+            gameLinks[23] = "products/xboxs.html";
+            gameNames[24] = "XBOX SERIES X 1 TB";
+            gameImages[24] = "xboxseriesx.webp";
+            gameDescription[24] = "Připrav se na revoluci v konzolovém hraní. Xbox Series X - nová konzole od Microsoftu přináší odvážný design, nejvyšší herní výkon a zbrusu nové zážitky";
+            gamePrices[24] = "10 290 Kč";
+            gameDeveloper[24] = "Microsoft";
+            gameContent[24] = "XBOXSERIESX";
+            gameLinks[24] = "products/xboxx.html";
+            gameNames[25] = "XBOX ONE S 500GB";
+            gameImages[25] = "xboxone.webp";
+            gameDescription[25] = "Vítá vás nová generace her a zábavy. Svět, kde hry posouvají hranice reality. Kde se televize řídí vašimi pokyny.";
+            gamePrices[25] = "4 990 Kč";
+            gameDeveloper[25] = "Microsoft";
+            gameContent[25] = "XBOXONE";
+            gameLinks[25] = "products/xboxo.html";
+            
+        }
+
+        var time = 3;
+
+        function odpocet() {
+            document.getElementById("vyhledavani").innerHTML = "NEBYLY NALEZENY ŽÁDNÉ PRODUKTY!<br>Vracím tě zpět za " + time;
+            time--;
+            if(time == -1) {
+                openWebsite("index.html");
+            }
+            setTimeout(odpocet, 1000);
+        }
+
+        function checkForGames() {
+            var games = "";
+            var totalFound = 0;
+            console.log("CONTENT: " + isContentAns);
+            if(isDeveloperAns) {
+                for(var i = 0; i < size; i++) {
+                    var dev = gameDeveloper[i];
+                    dev = dev.toLowerCase();
+                    var searchVal = searched.toLowerCase();
+                    if(dev === searchVal) totalFound++;
+                }
+            } else if(isContentAns) {
+                for(var i = 0; i < size; i++) {
+                    var content = gameContent[i];
+                    content = content.toLowerCase();
+                    var searchVal = searched.toLowerCase();
+                    if(content === searchVal) totalFound++;
+                }
+            } else {
+                for(var i = 0; i < size; i++) {
+                    var game = gameNames[i];
+                    game = game.toLowerCase();
+                    console.log(game);
+                    if(!(isNintendoSwitchConsole && game === "minecraft nintendo switch edition (nintendo)")) {
+                        var searchVal = searched.toLowerCase();
+                        if(isGame) searchVal = "(" + searchVal + ")";
+                        if(game.includes(searchVal)) totalFound++;    
+                    }
+                }
+            }
+            var foundGamesNamesId = Array(totalFound);
+            var foundGamesNames = Array(totalFound);
+            var foundGamesDescription = Array(totalFound);
+            var foundGamesImages = Array(totalFound);
+            var foundGamesLink = Array(totalFound);
+            var currentVal = 0;
+            if(isDeveloperAns) {
+                for(var i = 0; i < size; i++) {
+                    var dev = gameDeveloper[i];
+                    dev = dev.toLowerCase();
+                    var searchVal = searched.toLowerCase();
+                    if(dev === searchVal) {
+                        foundGamesNames[currentVal] = gameNames[i];
+                        foundGamesImages[currentVal] = gameImages[i];
+                        foundGamesDescription[currentVal] = gameDescription[i];
+                        foundGamesLink[currentVal] = gameLinks[i];
+                        foundGamesNamesId[currentVal] = gameNames[i] + currentVal;
+                        currentVal++; 
+                    }
+                }
+            } else if(isContentAns) {
+                for(var i = 0; i < size; i++) {
+                    var content = gameContent[i];
+                    content = content.toLowerCase();
+                    var searchVal = searched.toLowerCase();
+                    if(content === searchVal) {
+                        foundGamesNames[currentVal] = gameNames[i];
+                        foundGamesImages[currentVal] = gameImages[i];
+                        foundGamesDescription[currentVal] = gameDescription[i];
+                        foundGamesLink[currentVal] = gameLinks[i];
+                        foundGamesNamesId[currentVal] = gameNames[i] + currentVal;
+                        currentVal++; 
+                    }
+                }
+            } else {
+                for(var i = 0; i < size; i++) {
+                    var game = gameNames[i];
+                    game = game.toLowerCase();
+                    if(!(isNintendoSwitchConsole && game === "minecraft nintendo switch edition (nintendo)")) {
+                        var searchVal = searched.toLowerCase();
+                        if(isGame) searchVal = "(" + searchVal + ")";
+                        if(game.includes(searchVal)) {
+                            foundGamesNames[currentVal] = gameNames[i];
+                            foundGamesImages[currentVal] = gameImages[i];
+                            foundGamesDescription[currentVal] = gameDescription[i];
+                            foundGamesLink[currentVal] = gameLinks[i];
+                            foundGamesNamesId[currentVal] = gameNames[i] + currentVal;
+                            currentVal++; 
+                        }
+                    }
+                }
+            }
+            foundGamesNames.sort();
+            for(var i = 0; i < totalFound; i++) {
+                var game = foundGamesNames[i];
+                for(var x = 0; x < totalFound; x++) {
+                    var replaced = foundGamesNamesId[x].replace(game, "").trim();
+                    if(replaced.startsWith("1") || replaced.startsWith("2") || replaced.startsWith("3") || replaced.startsWith("4") || replaced.startsWith("5") || replaced.startsWith("6") || replaced.startsWith("7") || replaced.startsWith("8") || replaced.startsWith("9") || replaced.startsWith("0")) {
+                        games += "<div class='contentGame' onclick=" + "openWebsite" + "('" + foundGamesLink[x] + "')"  +"><img src=images/" + foundGamesImages[x] + " alt=''><div class='text'><p class='name'>" + game +"</p><p class='description'>" + foundGamesDescription[x] + "</p></div></div>"
+                    }
+                    else {
+                    }
+                }
+            }
+            document.getElementById("games").innerHTML = games;
+            if(games === "") {
+                odpocet();
+            }
+        }
+    </script>
+    <style>
+        #vyhledavani {
+            text-align: center;
+            margin: 50px;
+            font-size: 30px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body onload="loadData()">
+    <header>
+        <div class="head">
+            <a href="index.html"><img src="images/logo.png" alt="" class="logo"></a>
+            <form action="index2.html" class="searchbar">
+                <input type="text" name="search">
+                <br>
+                <button type="submit"><img src="images/search.png"></button>
+            </form>
+        </div>
+    </header>
+    <nav>
+        <div class="section ps" onmouseenter="hover('playstation')" onmouseleave="unhover('playstation')" onclick="openWebsite('index2.html?search=search+playstation+5+.,.')">
+            <p>PLAYSTATION</p>
+        </div>
+        <div class="section nt" onmouseenter="hover('nintendo')" onmouseleave="unhover('nintendo')" onclick="openWebsite('index2.html?search=search+nintendo+switch+.,.')">
+            <p>NINTENDO</p>
+        </div>
+        <div class="section xb" onmouseenter="hover('xbox')" onmouseleave="unhover('xbox')" onclick="openWebsite('index2.html?search=search+XBOX+SERIES+.,.')">
+            <p>XBOX</p>
+        </div>
+        <div class="section pc" onmouseenter="hover('pc')" onmouseleave="unhover('pc')"  onclick="openWebsite('index2.html?search=search+PC+game+.,.')">
+            <p>PC</p>
+        </div>
+    </nav>
+    <div class="sectionhoverblock playstations" onmouseenter="hover('playstation')" onmouseleave="unhover('playstation')">
+        <div class="sectionmenu">
+            <div class="sectionpart">
+                <img src="images/hogwartslegacy.png" alt="">
+                <div class="sectionparttext">
+                    <a href="index2.html?search=search+playstation+5+.,.">PlayStation 5</a>
+                    <div class="sectionpartlinks">
+                        <a href="index2.html?search=search+playstation+5+game+.,.">Hry</a>
+                        <a href="index2.html?search=search+playstation+5+.,.">Konzole</a>
+                    </div>
+                </div>
+            </div>
+            <div class="sectionpart">
+                <img src="images/hogwartslegacydeluxe.jpeg"  alt="">
+                <div class="sectionparttext">
+                    <a href="index2.html?search=search+playstation+4+.,.">PlayStation 4</a>
+                    <div class="sectionpartlinks">
+                        <a href="index2.html?search=search+playstation+4+game+.,.">Hry</a>
+                        <a href="index2.html?search=search+playstation+4+.,.">Konzole</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sectionhoverblock nintendos" onmouseenter="hover('nintendo')" onmouseleave="unhover('nintendo')">
+        <div class="sectionmenu">
+            <div class="sectionpart">
+                <img src="images/hogwartslegacynt.webp" alt="">
+                <div class="sectionparttext">
+                    <a href="index2.html?search=search+nintendo+switch+.,.">Nintendo Switch</a>
+                    <div class="sectionpartlinks">
+                        <a href="index2.html?search=search+nintendo+game+.,.">Hry</a>
+                        <a href="index2.html?search=search+nintendo+switch+.,.">Konzole</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sectionhoverblock xboxs" onmouseenter="hover('xbox')" onmouseleave="unhover('xbox')">
+        <div class="sectionmenu">
+            <div class="sectionpart">
+                <img src="images/hogwartslegacyxbseries.png" alt="">
+                <div class="sectionparttext">
+                    <a href="index2.html?search=search+XBOX+SERIES+.,.">Xbox Series</a>
+                    <div class="sectionpartlinks">
+                        <a href="index2.html?search=search+xbox+game+.,.">Hry</a>
+                        <a href="index2.html?search=search+XBOX+SERIES+.,.">Konzole</a>
+                    </div>
+                </div>
+            </div>
+            <div class="sectionpart">
+                <img src="images/hogwartslegacyxbone.jpeg"  alt="">
+                <div class="sectionparttext">
+                    <a href="index2.html?search=search+XBOX+ONE+.,.">Xbox One</a>
+                    <div class="sectionpartlinks">
+                        <a href="index2.html?search=search+xbox+game+.,.">Hry</a>
+                        <a href="index2.html?search=search+XBOX+ONE+.,.">Konzole</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sectionhoverblock pcs" onmouseenter="hover('pc')" onmouseleave="unhover('pc')">
+        <div class="sectionmenu">
+            <div class="sectionpart">
+                <img src="images/starwarsjedi.jpg"  alt="">
+                <div class="sectionparttext">
+                    <a href="index2.html?search=search+PC+game+.,.">Hry</a>
+                    <div class="sectionpartlinks">
+                        <a href="index2.html?search=search+PC+game+.,.">Hry</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p id="vyhledavani">VYHLEDÁVÁNÍ ""</p>
+    <div class="content" id="games">
+        
+    </div>
+</body>
+</html>
