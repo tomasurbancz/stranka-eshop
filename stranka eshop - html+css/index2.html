@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="cz">
+<head>
+    <link rel="shortcut icon" type="image/png" href="images/logo.png"/>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Výsledky vyhledávání</title>
+    <style>
+        #vyhledavani {
+            text-align: center;
+            margin: 50px;
+            font-size: 30px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body onload="loadData()">
+    <header>
+        <div class="head">
+            <a href="index.html"><img src="images/logo.png" alt="" class="logo"></a>
+            <form action="index2.html" class="searchbar">
+                <br>
+                <button type="submit"><img src="images/search.png"></button>
+            </form>
+        </div>
+    </header>
+    <p id="vyhledavani">VŠECHNY PRODUKTY</p>
+    <div class="content" id="games">
+        <a href="products/anno.html" class="contentA">
+            <div class='contentGame'>
+                <img src="images/anno1800.webp" alt="">
+                <div class='text'>
+                    <p class='name'>Anno 1800 Console Edition (PS5)</p>
+                    <p class='description'>Nech se pohltit jedním z nejúžasnějších a nejrychleji se měnících období v dějinách lidstva, které na tebe čeká v této komplexní budovatelské strategii!</p>
+               </div>
+            </div>
+        </a>
+        <a href="products/company.html" class="contentA">
+            <div class='contentGame'>
+                <img src="images/companyofheroes3.png" alt="">
+                <div class='text'>
+                    <p class='name'>COMPANY OF HEROES 3 LAUNCH EDITION METAL CASE (PC)</p>
+                    <p class='description'>Přidej se do boje s Company of Heroes 3. Legendární franšíza strategií je zpět a kombinuje souboj, který ti rozbuší srdce s novým stylem strategie</p>
+               </div>
+            </div>
+        </a>
+        <a href="products/clash.html" class="contentA">
+            <div class='contentGame'>
+                <img src="images/clashartifactofchaos.jpg" alt="">
+                <div class='text'>
+                    <p class='name'>Clash Artifacts of Chaos Zeno Edition (XBOX)</p>
+                    <p class='description'>Hra Clash Artifacts of Chaos se odehrává ve stejném světě jako Zeno Clash a Zeno Clash II, ale hra je zcela nezávislá.</p>
+               </div>
+            </div>
+        </a>
+        <a href="products/dc.html" class="contentA">
+            <div class='contentGame'>
+                <img src="images/dcjusticechaos.webp" alt="">
+                <div class='text'>
+                    <p class='name'>DC Justice League Cosmic Chaos (PS4)</p>
+                    <p class='description'>Spoj se proti chaosu ve zcela novém dobrodružství v otevřeném světe, kde se Liga spravedlnosti utká s panem Mxyzptlkem, mocným šprýmařem z 5. dimenze.</p>
+               </div>
+            </div>
+        </a>
+        <a href="products/dyschronia.html" class="contentA">
+            <div class='contentGame'>
+                <img src="images/dyschroniachronos.jfif" alt="">
+                <div class='text'>
+                    <p class='name'>Dyschronia Chronos Alternate VR2 (PS5)</p>
+                    <p class='description'>Zahraj si všechny tři epizody anime stylizovaného sci-fi a vyřeš teoreticky nemožný zločin v této napínavé sci-fi záhadě.</p>
+               </div>
+            </div>
+        </a>
+
+        <a href="products/fifa.html" class="contentA">
+            <div class='contentGame'>
+                <img src="images/fifa23.png" alt="">
+                <div class='text'>
+                    <p class='name'>FIFA 23 (PC)</p>
+                    <p class='description'>EA SPORTS FIFA 23 s technologií HyperMotion2 přináší do virtuální verze nejpopulárnějšího sportu světa ještě realističtější hratelnost, mužský i ženský šampionát FIFA World Cup</p>
+               </div>
+            </div>
+        </a>
+        <a href="products/forza.html" class="contentA">
+            <div class='contentGame'>
+                <img src="images/forzahorizonxbox.png" alt="">
+                <div class='text'>
+                    <p class='name'>FORZA HORIZON 5 (XBOX)</p>
+                    <p class='description'>Prozkoumej překrásné kraje Mexika, které se neustále vyvíjejí a ve kterých si užiješ neomezenou a zábavnou řidičskou akci ve stovkách nejlepších aut na světě.</p>
+               </div>
+            </div>
+        </a>
+        <a href="products/gamedec.html" class="contentA">
+            <div class='contentGame'>
+                <img src="images/gamedec.jfif" alt="">
+                <div class='text'>
+                    <p class='name'>Gamedec Definitive Edition (PS5)</p>
+                    <p class='description'>Oceněný Gamedec je kyberpunkové izometrické RPG pro jednoho hráče, které se neustále přizpůsobuje tvým rozhodnutím a nikdy tě nesoudí.</p>
+               </div>
+            </div>
+        </a>
+        <a href="products/hogwarts-legacy.html" class="contentA">
+            <div class='contentGame'>
+                <img src="images/hogwartslegacy.png" alt="">
+                <div class='text'>
+                    <p class='name'>Hogwarts Legacy (PS5)</p>
+                    <p class='description'>Přichází zcela nový příběh z kouzelného světa čar a kouzel. Pojď se podívat do Bradavic 19. století.</p>
+               </div>
+            </div>
+        </a>
+        <a href="products/hogwarts-deluxe.html" class="contentA">
+            <div class='contentGame'>
+                <img src="images/hogwartslegacydeluxe.jpeg" alt="">
+                <div class='text'>
+                    <p class='name'>Hogwarts Legacy Deluxe (PS4)</p>
+                    <p class='description'>Přichází zcela nový příběh z kouzelného světa čar a kouzel. Pojď se podívat do Bradavic 19. století.</p>
+               </div>
+            </div>
+        </a>
+
+        <a href="products/mcd.html" class="contentA">
+            <div class='contentGame'>
+                <img src="images/minecraftdungeonsxbox.png" alt="">
+                <div class='text'>
+                    <p class='name'>MINECRAFT DUNGEONS ULTIMATE EDITION (XBOX)</p>
+                    <p class='description'>Probojuj se novou akční adventurou, která je inspirovaná klasickými dungeony a celá je zasazená do jedinečného stylu Minecraft.</p>
+               </div>
+            </div>
+        </a>
+        <a href="products/mc.html" class="contentA">
+            <div class='contentGame'>
+                <img src="images/minecraftnintendo.png" alt="">
+                <div class='text'>
+                    <p class='name'>MINECRAFT NINTENDO SWITCH EDITION (NINTENDO)</p>
+                    <p class='description'>Jedna z nejhranějších her světa, speciálně upravená pro konzoli Nintendo Switch.</p>
+               </div>
+            </div>
+        </a>
+        <a href="products/monster.html" class="contentA">
+            <div class='contentGame'>
+                <img src="images/monsterenergy.jfif" alt="">
+                <div class='text'>
+                    <p class='name'>Monster Energy Supercross 6 (PS4)</p>
+                    <p class='description'>Originální superkrosová hra se vrací s veškerým oficiálním obsahem ze superkrosového mistrovství 2022.</p>
+               </div>
+            </div>
+        </a>
+        <a href="products/nintendo.html" class="contentA">
+            <div class='contentGame'>
+                <img src="images/nintendoswitch.webp" alt="">
+                <div class='text'>
+                    <p class='name'>NINTENDO SWITCH KONZOLE ČERVENÁ/MODRÁ</p>
+                    <p class='description'>Nintendo Switch je průlomová domácí herní konzole. Je ji totiž nejen možné připojit doma k televizi, ale taktéž okamžitě transformovat na handheld s 6.2 palcovou obrazovkou.</p>
+               </div>
+            </div>
+        </a>
+        <a href="products/ps4.html" class="contentA">
+            <div class='contentGame'>
+                <img src="images/ps4pro.webp" alt="">
+                <div class='text'>
+                    <p class='name'>PLAYSTATION 4 PRO</p>
+                    <p class='description'>Systém PlayStation 4 Pro je nabitý těmi nejnovějšími technologiemi a přináší ti ten doposud nejrychlejší, nejostřejší a nejplynulejší herní zážitek</p>
+               </div>
+            </div>
+        </a>
+
+        <a href="products/peppa.html" class="contentA">
+            <div class='contentGame'>
+                <img src="images/peppapig.jfif" alt="">
+                <div class='text'>
+                    <p class='name'>Peppa Pig World Adventures (PS4)</p>
+                    <p class='description'>Vytvoř si domov v sousedství prasátka Peppa Pig pro sebe, své bratry a sestry i dospělé.</p>
+               </div>
+            </div>
+        </a>
+        <a href="products/ps5.html" class="contentA">
+            <div class='contentGame'>
+                <img src="images/playstation5.webp" alt="">
+                <div class='text'>
+                    <p class='name'>PlayStation 5</p>
+                    <p class='description'>Pokračovatel nejprodávanější konzole současnosti</p>
+               </div>
+            </div>
+        </a>
+        <a href="products/ps5-gowr.html" class="contentA">
+            <div class='contentGame'>
+                <img src="images/playstation5godofwar.webp" alt="">
+                <div class='text'>
+                    <p class='name'>PlayStation 5 + Gof Of War Ragnarok</p>
+                    <p class='description'>Pokračovatel nejprodávanější konzole současnosti</p>
+               </div>
+            </div>
+        </a>
+        <a href="products/starwars.html" class="contentA">
+            <div class='contentGame'>
+                <img src="images/starwarsjedi.jpg" alt="">
+                <div class='text'>
+                    <p class='name'>STAR WARS JEDI SURVIVOR (PC)</p>
+                    <p class='description'>Star Wars Jedi: Survivor se odehrává pět let po událostech Star Wars Jedi: Fallen Order.</p>
+               </div>
+            </div>
+        </a>
+        <a href="products/zelda.html" class="contentA">
+            <div class='contentGame'>
+                <img src="images/zeldanintendo.png" alt="">
+                <div class='text'>
+                    <p class='name'>THE LEGEND OF ZELDA BREATH OF THE WILD (NINTENDO)</p>
+                    <p class='description'>Vstup do světa plného tajemství, objevů a dobrodružství v The Legend of Zelda: Breath of the Wild, nejnovějším titulu v úspěšné sérii</p>
+               </div>
+            </div>
+        </a>
+
+        <a href="products/train.html" class="contentA">
+            <div class='contentGame'>
+                <img src="images/trainlife.jfif" alt="">
+                <div class='text'>
+                    <p class='name'>Train Life A Railway Simulator (NINTENDO)</p>
+                    <p class='description'>Vůbec poprvé v železničním simulátoru se stáváš strojvedoucím i ředitelem společnosti zároveň!</p>
+               </div>
+            </div>
+        </a>
+        <a href="products/transport-fever.html" class="contentA">
+            <div class='contentGame'>
+                <img src="images/transportfever.jfif" alt="">
+                <div class='text'>
+                    <p class='name'>Transport Fever 2 Console Edition (PS4)</p>
+                    <p class='description'>Hra pro PS4 - Klasický žánr přepravní simulace má nový zlatý standard v podobě Transport Fever 2.</p>
+               </div>
+            </div>
+        </a>
+        <a href="products/wwe.html" class="contentA">
+            <div class='contentGame'>
+                <img src="images/wwe2k23.webp" alt="">
+                <div class='text'>
+                    <p class='name'>WWE 2K23 (PS4)</p>
+                    <p class='description'>WWE 2K23 je ještě silnější díky rozšířeným funkcím, nádherné grafice a bohaté soupisce superhvězd a legend WWE.</p>
+               </div>
+            </div>
+        </a>
+        <a href="products/xboxo.html" class="contentA">
+            <div class='contentGame'>
+                <img src="images/xboxone.webp" alt="">
+                <div class='text'>
+                    <p class='name'>XBOX ONE S 500GB</p>
+                    <p class='description'>Vítá vás nová generace her a zábavy. Svět, kde hry posouvají hranice reality. Kde se televize řídí vašimi pokyny.</p>
+               </div>
+            </div>
+        </a>
+        <a href="products/xboxs.html" class="contentA">
+            <div class='contentGame'>
+                <img src="images/xboxseriess.webp" alt="">
+                <div class='text'>
+                    <p class='name'>XBOX SERIES S 512 GB</p>
+                    <p class='description'>Připrav se na revoluci v konzolovém hraní. Xbox Series S - nová konzole od Microsoftu přináší odvážný design, nejvyšší herní výkon a zbrusu nové zážitky</p>
+               </div>
+            </div>
+        </a>
+
+        <a href="products/xboxx.html" class="contentA">
+            <div class='contentGame'>
+                <img src="images/xboxseriesx.webp" alt="">
+                <div class='text'>
+                    <p class='name'>XBOX SERIES X 1 TB</p>
+                    <p class='description'>Připrav se na revoluci v konzolovém hraní. Xbox Series X - nová konzole od Microsoftu přináší odvážný design, nejvyšší herní výkon a zbrusu nové zážitky</p>
+               </div>
+            </div>
+        </a>
+    </div>
+</body>
+</html>
